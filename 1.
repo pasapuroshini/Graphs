@@ -1,0 +1,154 @@
+
+
+**Graph Representation in Java**
+--------------------------------
+
+### **1\. Understanding Graph Input**
+
+*   **Graph consists of:**
+    
+    *   N: Number of nodes
+        
+    *   M: Number of edges
+        
+*   **Input format:**
+    
+    *   First line: N M
+        
+    *   Next M lines: Each line contains two integers representing an edge
+        
+    *   Example input:
+      
+      ```
+      5   6
+    1 2
+    1 3
+    3 4
+    2 4
+    2   5
+    4 5
+
+
+
+
+
+
+
+
+*   **Graph types considered:**
+    
+    *   **Undirected Graph** (edges go both ways)
+        
+    *   **Directed Graph** (edges go only one way)
+        
+
+### **2\. Storing Graph in Java**
+
+There are two primary ways to store a graph:
+
+#### **a) Adjacency Matrix**
+
+*   Uses a **2D matrix** of size (N+1) x (N+1) (for **1-based indexing**)
+    
+*   matrix\[i\]\[j\] = 1 if there is an edge between i and j, otherwise 0
+    
+  ```
+  1 2 3 4 5  
+1 0 1 1 0 0  
+2 1 0 0 1 1  
+3 1 0 0 1 0  
+4 0 1 1 0 1  
+5 0 1 0 1 0  
+
+```
+*   **Space Complexity:O(N²)**
+    
+   **Not efficient** for large graphs
+    
+*   **b) Adjacency List**
+    
+  Uses an   **ArrayList of ArrayLists**
+    
+*   adj\[i\] stores a list of neighbors for node i
+    
+
+#### **b) Adjacency List**
+
+*   Uses an **ArrayList of ArrayLists**
+    
+*   adj\[i\] stores a list of neighbors for node i
+
+  ```
+1 → [2, 3]  
+2 → [1, 4, 5]  
+3 → [1, 4]  
+4 → [2, 3, 5]  
+5 → [2, 4]  
+```
+**Space Complexity:** **O(2M) ≈ O(M)**
+
+*   **More efficient** than an adjacency matrix
+
+  
+# Adjacency Matrix Implementation
+<img width="431" alt="Screenshot 2025-03-21 at 12 40 30 PM" src="https://github.com/user-attachments/assets/b4f1e888-d931-40b7-ae6a-ffaa7f298949" />
+
+# Adjacency List Implementation
+
+<img width="435" alt="Screenshot 2025-03-21 at 12 40 44 PM" src="https://github.com/user-attachments/assets/7ed51314-b6a6-41a1-b3e6-12e0c0fd9021" />
+
+
+### **4\. Handling Special Cases**
+
+#### **a) Directed Graph**
+
+*   Only add edge from u → v
+*   Modify adjacency list code:
+
+  ```
+adjList.get(u).add(v); // No need for adjList.get(v).add(u);
+```
+#### **b) Weighted Graph**
+
+*   Instead of storing just nodes, store **pairs** (neighbor, weight)
+    
+*   Modify adjacency list:
+
+  ```
+ArrayList<ArrayList<Pair>> adjList = new ArrayList<>();
+class Pair {
+    int node, weight;
+    Pair(int node, int weight) {
+        this.node = node;
+        this.weight = weight;
+    }
+}
+
+```
+```
+1 → [(2,2), (3,3)]
+2 → [(1,2), (4,1), (5,6)]
+3 → [(1,3), (4,4)]
+4 → [(2,1), (3,4), (5,3)]
+5 → [(2,6), (4,3)]
+```
+
+
+<img width="627" alt="Screenshot 2025-03-21 at 12 29 30 PM" src="https://github.com/user-attachments/assets/fa6d9b5d-c9ce-442c-b382-256dc18e78e0" />
+
+
+**Summary**
+-----------
+
+✅ **Adjacency Matrix** → Simple but memory-intensive (**O(N²)**)
+
+✅ **Adjacency List** → Space-efficient (**O(M)**) and widely used
+
+✅ **Weighted Graph** → Use **pairs** instead of single integers
+
+✅ **Directed Graph** → Store only **one-way edges**
+
+
+
+
+<img width="967" alt="Screenshot 2025-03-21 at 12 01 56 PM" src="https://github.com/user-attachments/assets/5e1fa966-d86c-49db-baf2-20458b12ba19" />
